@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YGO Hand Probability</title>
 
-  <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-  <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <style>
@@ -30,20 +28,16 @@
     }
 
     .deck-counter {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 16px;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 20px;
     }
 
     .deck-counter strong {
-      color: #333;
-    }
-
-    .deck-counter.over-limit strong {
+      font-size: 18px;
       color: #b71c1c;
     }
 
-    /* Add card form row */
     .add-card-form {
       display: flex;
       gap: 10px;
@@ -66,7 +60,6 @@
       min-width: 120px;
     }
 
-    /* Deck table */
     .deck-table-wrap {
       overflow-x: auto;
     }
@@ -103,12 +96,6 @@
       vertical-align: middle;
     }
 
-    table.deck-table .td-num {
-      color: #aaa;
-      font-size: 12px;
-      width: 36px;
-    }
-
     table.deck-table .td-qty {
       font-weight: 600;
       width: 50px;
@@ -128,9 +115,9 @@
       letter-spacing: 0.5px;
     }
 
-    .type-monster  { background-color: #fff3cd; color: #856404; }
-    .type-spell    { background-color: #d1f0d6; color: #1a6b30; }
-    .type-trap     { background-color: #f8d7da; color: #842029; }
+    .type-monster { background-color: #fff3cd; color: #856404; }
+    .type-spell   { background-color: #d1f0d6; color: #1a6b30; }
+    .type-trap    { background-color: #f8d7da; color: #842029; }
 
     .remove-icon-btn {
       background: none;
@@ -152,93 +139,7 @@
       font-size: 13px;
     }
 
-    /* Hand requirements panel */
-    .switch-label {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .chips-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .chip.selected-card {
-      background-color: #b71c1c;
-      color: white;
-      cursor: pointer;
-    }
-
-    .chip.unselected-card {
-      cursor: pointer;
-    }
-
-    .condition-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .condition-row:last-child {
-      border-bottom: none;
-    }
-
-    .condition-card-name {
-      flex: 1;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qty-controls span {
-      font-size: 15px;
-      font-weight: bold;
-      min-width: 18px;
-      text-align: center;
-    }
-
-    .qty-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #b71c1c;
-      padding: 0;
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    /* Results */
-    #result-section {
-      display: none;
-    }
-
-    .result-probability {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #b71c1c;
-    }
-
-    .result-label {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .empty-state {
-      color: #bbb;
-      font-size: 13px;
-    }
-
     @media (max-width: 600px) {
-      .result-probability { font-size: 2rem; }
       .add-card-form { flex-direction: column; }
       .add-card-form .input-field,
       .add-card-form .select-wrapper-sm,
@@ -248,7 +149,6 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">
@@ -259,8 +159,6 @@
   </nav>
 
   <div class="container" style="margin-top: 30px; margin-bottom: 60px;">
-
-    <!-- ── Deck Builder ─────────────────────────────────────────── -->
     <div class="row">
       <div class="col s12">
         <div class="card-panel" style="border-left: 4px solid #b71c1c;">
@@ -270,11 +168,10 @@
             Deck Builder
           </h5>
 
-          <p class="deck-counter" id="deck-counter">
-            Cards in deck: <strong>0</strong> &nbsp;/&nbsp; 40–60
+          <p class="deck-counter">
+            Total Cards in Deck: <strong id="deck-total">0</strong> / 60
           </p>
 
-          <!-- Add card form -->
           <div class="add-card-form">
             <div class="input-field">
               <input id="new-card-name" type="text" placeholder="e.g. Ash Blossom" />
@@ -304,12 +201,10 @@
             </button>
           </div>
 
-          <!-- Deck table -->
           <div class="deck-table-wrap">
             <table class="deck-table">
               <thead>
                 <tr>
-                  <th class="td-num">#</th>
                   <th>Card Name</th>
                   <th class="td-type">Type</th>
                   <th class="td-qty">Qty</th>
@@ -318,7 +213,7 @@
               </thead>
               <tbody id="deck-tbody">
                 <tr class="empty-table-row">
-                  <td colspan="5">No cards added yet.</td>
+                  <td colspan="4">No cards added yet.</td>
                 </tr>
               </tbody>
             </table>
@@ -327,77 +222,20 @@
         </div>
       </div>
     </div>
-
-    <!-- ── Hand Requirements ────────────────────────────────────── -->
-    <div class="row">
-      <div class="col s12 m6">
-        <div class="card-panel">
-          <h5 class="section-title">
-            <i class="material-icons" style="vertical-align:middle;">casino</i>
-            Hand Requirements
-          </h5>
-
-          <div style="margin-bottom: 16px;">
-            <span class="switch-label">Going First (5 cards)</span>
-            <div class="switch" style="display:inline-block; margin: 0 12px;">
-              <label>
-                <input type="checkbox" id="going-second-toggle" onchange="updateHandLabel()" />
-                <span class="lever"></span>
-              </label>
-            </div>
-            <span class="switch-label">Going Second (6 cards)</span>
-          </div>
-          <p id="hand-size-label" style="font-size:13px; color:#888; margin-bottom:16px;">
-            Hand size: <strong>5</strong>
-          </p>
-
-          <p style="font-size: 14px; color: #555; margin-bottom: 6px;">
-            Click a card to add it as a requirement, then set the minimum copies needed:
-          </p>
-
-          <div class="chips-row" id="card-chips">
-            <span class="empty-state">Add cards to your deck first.</span>
-          </div>
-
-          <div style="margin-top: 16px;" id="conditions-list"></div>
-
-          <button class="btn red darken-3 waves-effect waves-light" style="margin-top: 20px; width: 100%;" onclick="calculate()">
-            <i class="material-icons left">calculate</i>Calculate Probability
-          </button>
-        </div>
-      </div>
-
-      <!-- Results -->
-      <div class="col s12 m6" id="result-section">
-        <div class="card-panel" style="text-align: center; border-top: 4px solid #b71c1c; height: 100%;">
-          <p class="result-label" style="margin-top: 16px;">Probability of opening hand meeting requirements</p>
-          <p class="result-probability" id="result-value">—</p>
-          <p class="result-label" id="result-detail"></p>
-          <p style="font-size: 12px; color: #aaa; margin-top: 8px;">Based on 100,000 simulated hands</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   <script>
     // { name: { qty: number, type: string } }
     let deck = {};
-    // { name: minCopies }
-    let conditions = {};
 
     document.addEventListener('DOMContentLoaded', () => {
       M.FormSelect.init(document.querySelectorAll('select'));
-
       document.getElementById('new-card-name').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') addCard();
       });
     });
-
-    // ── Deck Builder ──────────────────────────────────────────────
 
     function addCard() {
       const nameInput = document.getElementById('new-card-name');
@@ -410,31 +248,20 @@
       const qty  = parseInt(document.getElementById('new-card-qty').value);
       const type = document.getElementById('new-card-type').value;
 
-      const currentTotal = deckTotal();
-      const existingQty  = deck[name] ? deck[name].qty : 0;
-      const addAmount    = qty - existingQty;
-
-      if (currentTotal + addAmount > 60) {
+      if (deckTotal() - (deck[name] ? deck[name].qty : 0) + qty > 60) {
         M.toast({ html: 'Deck cannot exceed 60 cards.', classes: 'red darken-3' });
         return;
       }
 
       deck[name] = { qty, type };
       nameInput.value = '';
-
-      // Re-init selects so Materialize keeps label state correct
       M.FormSelect.init(document.querySelectorAll('select'));
-
       renderDeck();
-      renderChips();
     }
 
     function removeCard(name) {
       delete deck[name];
-      delete conditions[name];
       renderDeck();
-      renderChips();
-      renderConditions();
     }
 
     function deckTotal() {
@@ -442,34 +269,24 @@
     }
 
     function renderDeck() {
-      const names  = Object.keys(deck);
-      const total  = deckTotal();
-      const tbody  = document.getElementById('deck-tbody');
-      const counter = document.getElementById('deck-counter');
+      const total = deckTotal();
+      document.getElementById('deck-total').textContent = total;
 
-      counter.innerHTML = `Cards in deck: <strong>${total}</strong> &nbsp;/&nbsp; 40–60`;
-      counter.className = 'deck-counter' + (total > 60 ? ' over-limit' : '');
+      const tbody = document.getElementById('deck-tbody');
+      const names = Object.keys(deck);
 
       if (names.length === 0) {
-        tbody.innerHTML = '<tr class="empty-table-row"><td colspan="5">No cards added yet.</td></tr>';
+        tbody.innerHTML = '<tr class="empty-table-row"><td colspan="4">No cards added yet.</td></tr>';
         return;
       }
 
-      let runningNum = 0;
-      tbody.innerHTML = names.map((name, i) => {
-        runningNum += deck[name].qty;
-        const startNum = runningNum - deck[name].qty + 1;
-        const displayNum = deck[name].qty === 1
-          ? startNum
-          : `${startNum}–${runningNum}`;
-        const type = deck[name].type;
-        const badgeClass = `type-badge type-${type.toLowerCase()}`;
+      tbody.innerHTML = names.map(name => {
+        const { qty, type } = deck[name];
         return `
           <tr>
-            <td class="td-num">${displayNum}</td>
             <td>${htmlEsc(name)}</td>
-            <td class="td-type"><span class="${badgeClass}">${type}</span></td>
-            <td class="td-qty">${deck[name].qty}x</td>
+            <td class="td-type"><span class="type-badge type-${type.toLowerCase()}">${type}</span></td>
+            <td class="td-qty">${qty}x</td>
             <td>
               <button class="remove-icon-btn" onclick="removeCard('${jsEsc(name)}')" title="Remove">
                 <i class="material-icons small">close</i>
@@ -478,133 +295,6 @@
           </tr>`;
       }).join('');
     }
-
-    // ── Hand Requirements ──────────────────────────────────────────
-
-    function renderChips() {
-      const container = document.getElementById('card-chips');
-      const names = Object.keys(deck);
-
-      if (names.length === 0) {
-        container.innerHTML = '<span class="empty-state">Add cards to your deck first.</span>';
-        return;
-      }
-
-      container.innerHTML = names.map(name => {
-        const selected = conditions[name] !== undefined;
-        return `<div class="chip ${selected ? 'selected-card' : 'unselected-card'}" onclick="toggleCondition('${jsEsc(name)}')">${htmlEsc(name)}</div>`;
-      }).join('');
-    }
-
-    function toggleCondition(name) {
-      if (conditions[name] !== undefined) {
-        delete conditions[name];
-      } else {
-        conditions[name] = 1;
-      }
-      renderChips();
-      renderConditions();
-    }
-
-    function renderConditions() {
-      const list  = document.getElementById('conditions-list');
-      const names = Object.keys(conditions);
-
-      if (names.length === 0) {
-        list.innerHTML = '';
-        return;
-      }
-
-      list.innerHTML = '<p style="font-size:13px; color:#888; margin-bottom:4px;">Min copies needed in hand:</p>' +
-        names.map(name => `
-          <div class="condition-row">
-            <span class="condition-card-name">${htmlEsc(name)}</span>
-            <div class="qty-controls">
-              <button class="qty-btn" onclick="changeMin('${jsEsc(name)}', -1)">−</button>
-              <span>${conditions[name]}</span>
-              <button class="qty-btn" onclick="changeMin('${jsEsc(name)}', 1)">+</button>
-            </div>
-          </div>`).join('');
-    }
-
-    function changeMin(name, delta) {
-      const max = deck[name] ? deck[name].qty : 3;
-      conditions[name] = Math.max(1, Math.min(max, conditions[name] + delta));
-      renderConditions();
-    }
-
-    function updateHandLabel() {
-      const goingSecond = document.getElementById('going-second-toggle').checked;
-      document.getElementById('hand-size-label').innerHTML =
-        `Hand size: <strong>${goingSecond ? 6 : 5}</strong>`;
-    }
-
-    // ── Simulation ────────────────────────────────────────────────
-
-    function calculate() {
-      const total = deckTotal();
-
-      if (total < 40) {
-        M.toast({ html: `Deck needs at least 40 cards (currently ${total}).`, classes: 'red darken-3' });
-        return;
-      }
-      if (total > 60) {
-        M.toast({ html: `Deck cannot exceed 60 cards (currently ${total}).`, classes: 'red darken-3' });
-        return;
-      }
-
-      const conditionNames = Object.keys(conditions);
-      if (conditionNames.length === 0) {
-        M.toast({ html: 'Select at least one card to test for.', classes: 'red darken-3' });
-        return;
-      }
-
-      const goingSecond = document.getElementById('going-second-toggle').checked;
-      const handSize = goingSecond ? 6 : 5;
-
-      // Build full deck array
-      const fullDeck = [];
-      for (const name of Object.keys(deck)) {
-        for (let i = 0; i < deck[name].qty; i++) fullDeck.push(name);
-      }
-
-      const TRIALS = 100000;
-      let successes = 0;
-
-      for (let t = 0; t < TRIALS; t++) {
-        if (meetsConditions(drawHand(fullDeck, handSize), conditions)) successes++;
-      }
-
-      const prob = successes / TRIALS;
-      const pct  = (prob * 100).toFixed(1);
-      const odds = prob > 0 ? `≈ 1 in ${Math.round(1 / prob)}` : 'Never';
-
-      document.getElementById('result-value').textContent  = `${pct}%`;
-      document.getElementById('result-detail').textContent = `${odds} hands · ${handSize}-card hand · ${total}-card deck`;
-
-      const section = document.getElementById('result-section');
-      section.style.display = 'block';
-    }
-
-    function drawHand(fullDeck, size) {
-      const d    = fullDeck.slice();
-      const hand = [];
-      for (let i = 0; i < size; i++) {
-        const idx = Math.floor(Math.random() * (d.length - i));
-        hand.push(d[idx]);
-        d[idx] = d[d.length - 1 - i];
-      }
-      return hand;
-    }
-
-    function meetsConditions(hand, conditions) {
-      for (const name of Object.keys(conditions)) {
-        if (hand.filter(c => c === name).length < conditions[name]) return false;
-      }
-      return true;
-    }
-
-    // ── Utility ───────────────────────────────────────────────────
 
     function jsEsc(str)   { return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
     function htmlEsc(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
