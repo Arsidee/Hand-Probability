@@ -23,107 +23,139 @@
       padding-left: 20px;
     }
 
-    .page-title {
+    .section-title {
       color: #b71c1c;
       font-weight: 600;
+      margin-bottom: 12px;
     }
 
-    .card-panel.deck-card {
-      border-left: 4px solid #b71c1c;
-    }
-
-    .card-count-badge {
-      background-color: #b71c1c;
-      color: white;
-      border-radius: 12px;
-      padding: 2px 10px;
+    .deck-counter {
       font-size: 13px;
-      font-weight: bold;
+      color: #777;
+      margin-bottom: 16px;
     }
 
-    .card-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px solid #eee;
+    .deck-counter strong {
+      color: #333;
     }
 
-    .card-row:last-child {
-      border-bottom: none;
-    }
-
-    .card-name {
-      font-weight: 500;
-      flex: 1;
-    }
-
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qty-controls span {
-      font-size: 16px;
-      font-weight: bold;
-      min-width: 20px;
-      text-align: center;
-    }
-
-    .qty-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
+    .deck-counter.over-limit strong {
       color: #b71c1c;
-      padding: 0;
-      font-size: 20px;
-      line-height: 1;
     }
 
-    .remove-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #999;
-      margin-left: 10px;
-    }
-
-    .condition-row {
+    /* Add card form row */
+    .add-card-form {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
+      gap: 10px;
+      align-items: flex-end;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
-    .condition-row:last-child {
-      border-bottom: none;
-    }
-
-    .condition-row .card-name {
+    .add-card-form .input-field {
+      margin: 0;
+      flex: 1;
       min-width: 140px;
     }
 
-    #result-section {
-      display: none;
+    .add-card-form .select-wrapper-sm {
+      min-width: 80px;
     }
 
-    .result-probability {
-      font-size: 3rem;
-      font-weight: 700;
+    .add-card-form .select-wrapper-md {
+      min-width: 120px;
+    }
+
+    /* Deck table */
+    .deck-table-wrap {
+      overflow-x: auto;
+    }
+
+    table.deck-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    table.deck-table thead tr {
+      background-color: #b71c1c;
+      color: white;
+    }
+
+    table.deck-table thead th {
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    table.deck-table tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    table.deck-table tbody tr:hover {
+      background-color: #fff3f3;
+    }
+
+    table.deck-table tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+
+    table.deck-table .td-num {
+      color: #aaa;
+      font-size: 12px;
+      width: 36px;
+    }
+
+    table.deck-table .td-qty {
+      font-weight: 600;
+      width: 50px;
+    }
+
+    table.deck-table .td-type {
+      width: 90px;
+    }
+
+    .type-badge {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .type-monster  { background-color: #fff3cd; color: #856404; }
+    .type-spell    { background-color: #d1f0d6; color: #1a6b30; }
+    .type-trap     { background-color: #f8d7da; color: #842029; }
+
+    .remove-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #bbb;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .remove-icon-btn:hover {
       color: #b71c1c;
     }
 
-    .result-label {
-      font-size: 1rem;
-      color: #555;
+    .empty-table-row td {
+      text-align: center;
+      color: #bbb;
+      padding: 24px 0;
+      font-size: 13px;
     }
 
-    .deck-total {
-      font-size: 13px;
-      color: #888;
+    /* Hand requirements panel */
+    .switch-label {
+      font-size: 14px;
+      color: #555;
     }
 
     .chips-row {
@@ -143,22 +175,74 @@
       cursor: pointer;
     }
 
-    .switch-label {
+    .condition-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .condition-row:last-child {
+      border-bottom: none;
+    }
+
+    .condition-card-name {
+      flex: 1;
+      font-weight: 500;
       font-size: 14px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-controls span {
+      font-size: 15px;
+      font-weight: bold;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .qty-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #b71c1c;
+      padding: 0;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    /* Results */
+    #result-section {
+      display: none;
+    }
+
+    .result-probability {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #b71c1c;
+    }
+
+    .result-label {
+      font-size: 1rem;
       color: #555;
     }
 
     .empty-state {
-      text-align: center;
-      color: #aaa;
-      padding: 20px 0;
-      font-size: 14px;
+      color: #bbb;
+      font-size: 13px;
     }
 
     @media (max-width: 600px) {
-      .result-probability {
-        font-size: 2rem;
-      }
+      .result-probability { font-size: 2rem; }
+      .add-card-form { flex-direction: column; }
+      .add-card-form .input-field,
+      .add-card-form .select-wrapper-sm,
+      .add-card-form .select-wrapper-md { min-width: 100%; width: 100%; }
     }
   </style>
 </head>
@@ -176,40 +260,83 @@
 
   <div class="container" style="margin-top: 30px; margin-bottom: 60px;">
 
+    <!-- ── Deck Builder ─────────────────────────────────────────── -->
     <div class="row">
-      <!-- LEFT: Deck Builder -->
-      <div class="col s12 m6">
-        <div class="card-panel deck-card">
-          <h5 class="page-title">
+      <div class="col s12">
+        <div class="card-panel" style="border-left: 4px solid #b71c1c;">
+
+          <h5 class="section-title">
             <i class="material-icons" style="vertical-align:middle;">library_books</i>
             Deck Builder
           </h5>
-          <p class="deck-total">Total cards: <strong id="deck-total">0</strong> / 40–60</p>
 
-          <!-- Add card input -->
-          <div class="input-field" style="margin-bottom: 0;">
-            <input id="new-card-name" type="text" placeholder="Card name (e.g. Ash Blossom)" />
-            <label for="new-card-name">Add Card</label>
-          </div>
-          <button class="btn red darken-3 waves-effect waves-light" style="margin-top: 8px; width: 100%;" onclick="addCard()">
-            <i class="material-icons left">add</i>Add to Deck
-          </button>
+          <p class="deck-counter" id="deck-counter">
+            Cards in deck: <strong>0</strong> &nbsp;/&nbsp; 40–60
+          </p>
 
-          <div style="margin-top: 20px;" id="deck-list">
-            <p class="empty-state">No cards added yet.</p>
+          <!-- Add card form -->
+          <div class="add-card-form">
+            <div class="input-field">
+              <input id="new-card-name" type="text" placeholder="e.g. Ash Blossom" />
+              <label for="new-card-name">Card Name</label>
+            </div>
+
+            <div class="input-field select-wrapper-sm">
+              <select id="new-card-qty">
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="3" selected>3x</option>
+              </select>
+              <label>Qty</label>
+            </div>
+
+            <div class="input-field select-wrapper-md">
+              <select id="new-card-type">
+                <option value="Monster">Monster</option>
+                <option value="Spell">Spell</option>
+                <option value="Trap">Trap</option>
+              </select>
+              <label>Type</label>
+            </div>
+
+            <button class="btn red darken-3 waves-effect waves-light" onclick="addCard()">
+              <i class="material-icons left">add</i>Add
+            </button>
           </div>
+
+          <!-- Deck table -->
+          <div class="deck-table-wrap">
+            <table class="deck-table">
+              <thead>
+                <tr>
+                  <th class="td-num">#</th>
+                  <th>Card Name</th>
+                  <th class="td-type">Type</th>
+                  <th class="td-qty">Qty</th>
+                  <th style="width:36px;"></th>
+                </tr>
+              </thead>
+              <tbody id="deck-tbody">
+                <tr class="empty-table-row">
+                  <td colspan="5">No cards added yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
+    </div>
 
-      <!-- RIGHT: Hand Test Setup -->
+    <!-- ── Hand Requirements ────────────────────────────────────── -->
+    <div class="row">
       <div class="col s12 m6">
         <div class="card-panel">
-          <h5 class="page-title">
+          <h5 class="section-title">
             <i class="material-icons" style="vertical-align:middle;">casino</i>
             Hand Requirements
           </h5>
 
-          <!-- Going first / second toggle -->
           <div style="margin-bottom: 16px;">
             <span class="switch-label">Going First (5 cards)</span>
             <div class="switch" style="display:inline-block; margin: 0 12px;">
@@ -220,32 +347,30 @@
             </div>
             <span class="switch-label">Going Second (6 cards)</span>
           </div>
-          <p id="hand-size-label" style="font-size:13px; color:#888;">Hand size: <strong>5</strong></p>
-
-          <p style="font-size: 14px; color: #555; margin-bottom: 6px;">
-            Select cards to look for, then set the minimum copies needed in hand:
+          <p id="hand-size-label" style="font-size:13px; color:#888; margin-bottom:16px;">
+            Hand size: <strong>5</strong>
           </p>
 
-          <!-- Card chips for selection -->
+          <p style="font-size: 14px; color: #555; margin-bottom: 6px;">
+            Click a card to add it as a requirement, then set the minimum copies needed:
+          </p>
+
           <div class="chips-row" id="card-chips">
-            <span class="empty-state" style="padding:0;">Add cards to your deck first.</span>
+            <span class="empty-state">Add cards to your deck first.</span>
           </div>
 
-          <!-- Conditions list -->
           <div style="margin-top: 16px;" id="conditions-list"></div>
 
-          <button class="btn red darken-3 waves-effect waves-light" style="margin-top: 16px; width: 100%;" onclick="calculate()">
+          <button class="btn red darken-3 waves-effect waves-light" style="margin-top: 20px; width: 100%;" onclick="calculate()">
             <i class="material-icons left">calculate</i>Calculate Probability
           </button>
         </div>
       </div>
-    </div>
 
-    <!-- Results -->
-    <div class="row" id="result-section">
-      <div class="col s12">
-        <div class="card-panel" style="text-align: center; border-top: 4px solid #b71c1c;">
-          <p class="result-label">Probability of opening hand meeting requirements</p>
+      <!-- Results -->
+      <div class="col s12 m6" id="result-section">
+        <div class="card-panel" style="text-align: center; border-top: 4px solid #b71c1c; height: 100%;">
+          <p class="result-label" style="margin-top: 16px;">Probability of opening hand meeting requirements</p>
           <p class="result-probability" id="result-value">—</p>
           <p class="result-label" id="result-detail"></p>
           <p style="font-size: 12px; color: #aaa; margin-top: 8px;">Based on 100,000 simulated hands</p>
@@ -259,35 +384,49 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   <script>
-    // State
-    let deck = {}; // { cardName: quantity }
-    let conditions = {}; // { cardName: minCopies }
+    // { name: { qty: number, type: string } }
+    let deck = {};
+    // { name: minCopies }
+    let conditions = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      M.FormSelect.init(document.querySelectorAll('select'));
+
+      document.getElementById('new-card-name').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') addCard();
+      });
+    });
 
     // ── Deck Builder ──────────────────────────────────────────────
 
     function addCard() {
-      const input = document.getElementById('new-card-name');
-      const name = input.value.trim();
-      if (!name) return;
-
-      if (deck[name]) {
-        deck[name] = Math.min(deck[name] + 1, 3);
-      } else {
-        deck[name] = 1;
+      const nameInput = document.getElementById('new-card-name');
+      const name = nameInput.value.trim();
+      if (!name) {
+        M.toast({ html: 'Please enter a card name.', classes: 'red darken-3' });
+        return;
       }
 
-      input.value = '';
+      const qty  = parseInt(document.getElementById('new-card-qty').value);
+      const type = document.getElementById('new-card-type').value;
+
+      const currentTotal = deckTotal();
+      const existingQty  = deck[name] ? deck[name].qty : 0;
+      const addAmount    = qty - existingQty;
+
+      if (currentTotal + addAmount > 60) {
+        M.toast({ html: 'Deck cannot exceed 60 cards.', classes: 'red darken-3' });
+        return;
+      }
+
+      deck[name] = { qty, type };
+      nameInput.value = '';
+
+      // Re-init selects so Materialize keeps label state correct
+      M.FormSelect.init(document.querySelectorAll('select'));
+
       renderDeck();
       renderChips();
-    }
-
-    document.getElementById('new-card-name').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') addCard();
-    });
-
-    function changeQty(name, delta) {
-      deck[name] = Math.max(1, Math.min(3, deck[name] + delta));
-      renderDeck();
     }
 
     function removeCard(name) {
@@ -298,33 +437,46 @@
       renderConditions();
     }
 
+    function deckTotal() {
+      return Object.values(deck).reduce((s, c) => s + c.qty, 0);
+    }
+
     function renderDeck() {
-      const list = document.getElementById('deck-list');
-      const names = Object.keys(deck);
+      const names  = Object.keys(deck);
+      const total  = deckTotal();
+      const tbody  = document.getElementById('deck-tbody');
+      const counter = document.getElementById('deck-counter');
+
+      counter.innerHTML = `Cards in deck: <strong>${total}</strong> &nbsp;/&nbsp; 40–60`;
+      counter.className = 'deck-counter' + (total > 60 ? ' over-limit' : '');
 
       if (names.length === 0) {
-        list.innerHTML = '<p class="empty-state">No cards added yet.</p>';
-        document.getElementById('deck-total').textContent = '0';
+        tbody.innerHTML = '<tr class="empty-table-row"><td colspan="5">No cards added yet.</td></tr>';
         return;
       }
 
-      const total = names.reduce((sum, n) => sum + deck[n], 0);
-      document.getElementById('deck-total').textContent = total;
-
-      list.innerHTML = names.map(name => `
-        <div class="card-row">
-          <span class="card-name">${name}</span>
-          <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty('${esc(name)}', -1)">−</button>
-            <span>${deck[name]}x</span>
-            <button class="qty-btn" onclick="changeQty('${esc(name)}', 1)">+</button>
-            <span class="card-count-badge">${deck[name]}</span>
-          </div>
-          <button class="remove-btn" onclick="removeCard('${esc(name)}')">
-            <i class="material-icons small">close</i>
-          </button>
-        </div>
-      `).join('');
+      let runningNum = 0;
+      tbody.innerHTML = names.map((name, i) => {
+        runningNum += deck[name].qty;
+        const startNum = runningNum - deck[name].qty + 1;
+        const displayNum = deck[name].qty === 1
+          ? startNum
+          : `${startNum}–${runningNum}`;
+        const type = deck[name].type;
+        const badgeClass = `type-badge type-${type.toLowerCase()}`;
+        return `
+          <tr>
+            <td class="td-num">${displayNum}</td>
+            <td>${htmlEsc(name)}</td>
+            <td class="td-type"><span class="${badgeClass}">${type}</span></td>
+            <td class="td-qty">${deck[name].qty}x</td>
+            <td>
+              <button class="remove-icon-btn" onclick="removeCard('${jsEsc(name)}')" title="Remove">
+                <i class="material-icons small">close</i>
+              </button>
+            </td>
+          </tr>`;
+      }).join('');
     }
 
     // ── Hand Requirements ──────────────────────────────────────────
@@ -334,13 +486,13 @@
       const names = Object.keys(deck);
 
       if (names.length === 0) {
-        container.innerHTML = '<span class="empty-state" style="padding:0;">Add cards to your deck first.</span>';
+        container.innerHTML = '<span class="empty-state">Add cards to your deck first.</span>';
         return;
       }
 
       container.innerHTML = names.map(name => {
         const selected = conditions[name] !== undefined;
-        return `<div class="chip ${selected ? 'selected-card' : 'unselected-card'}" onclick="toggleCondition('${esc(name)}')">${name}</div>`;
+        return `<div class="chip ${selected ? 'selected-card' : 'unselected-card'}" onclick="toggleCondition('${jsEsc(name)}')">${htmlEsc(name)}</div>`;
       }).join('');
     }
 
@@ -355,7 +507,7 @@
     }
 
     function renderConditions() {
-      const list = document.getElementById('conditions-list');
+      const list  = document.getElementById('conditions-list');
       const names = Object.keys(conditions);
 
       if (names.length === 0) {
@@ -366,18 +518,17 @@
       list.innerHTML = '<p style="font-size:13px; color:#888; margin-bottom:4px;">Min copies needed in hand:</p>' +
         names.map(name => `
           <div class="condition-row">
-            <span class="card-name">${name}</span>
+            <span class="condition-card-name">${htmlEsc(name)}</span>
             <div class="qty-controls">
-              <button class="qty-btn" onclick="changeMin('${esc(name)}', -1)">−</button>
+              <button class="qty-btn" onclick="changeMin('${jsEsc(name)}', -1)">−</button>
               <span>${conditions[name]}</span>
-              <button class="qty-btn" onclick="changeMin('${esc(name)}', 1)">+</button>
+              <button class="qty-btn" onclick="changeMin('${jsEsc(name)}', 1)">+</button>
             </div>
-          </div>
-        `).join('');
+          </div>`).join('');
     }
 
     function changeMin(name, delta) {
-      const max = deck[name] || 3;
+      const max = deck[name] ? deck[name].qty : 3;
       conditions[name] = Math.max(1, Math.min(max, conditions[name] + delta));
       renderConditions();
     }
@@ -391,11 +542,14 @@
     // ── Simulation ────────────────────────────────────────────────
 
     function calculate() {
-      const cardNames = Object.keys(deck);
-      const total = cardNames.reduce((s, n) => s + deck[n], 0);
+      const total = deckTotal();
 
-      if (total < 5) {
-        M.toast({ html: 'Add more cards to your deck first.', classes: 'red darken-3' });
+      if (total < 40) {
+        M.toast({ html: `Deck needs at least 40 cards (currently ${total}).`, classes: 'red darken-3' });
+        return;
+      }
+      if (total > 60) {
+        M.toast({ html: `Deck cannot exceed 60 cards (currently ${total}).`, classes: 'red darken-3' });
         return;
       }
 
@@ -410,35 +564,30 @@
 
       // Build full deck array
       const fullDeck = [];
-      for (const name of cardNames) {
-        for (let i = 0; i < deck[name]; i++) fullDeck.push(name);
+      for (const name of Object.keys(deck)) {
+        for (let i = 0; i < deck[name].qty; i++) fullDeck.push(name);
       }
-      // Fill remainder with "other"
-      while (fullDeck.length < total) fullDeck.push('__other__');
 
       const TRIALS = 100000;
       let successes = 0;
 
       for (let t = 0; t < TRIALS; t++) {
-        const hand = drawHand(fullDeck, handSize);
-        if (meetsConditions(hand, conditions)) successes++;
+        if (meetsConditions(drawHand(fullDeck, handSize), conditions)) successes++;
       }
 
       const prob = successes / TRIALS;
-      const pct = (prob * 100).toFixed(1);
-      const approxOdds = prob > 0 ? `≈ 1 in ${Math.round(1 / prob)}` : 'Never';
+      const pct  = (prob * 100).toFixed(1);
+      const odds = prob > 0 ? `≈ 1 in ${Math.round(1 / prob)}` : 'Never';
 
-      document.getElementById('result-value').textContent = `${pct}%`;
-      document.getElementById('result-detail').textContent =
-        `${approxOdds} hands  ·  ${handSize}-card hand  ·  ${total}-card deck`;
+      document.getElementById('result-value').textContent  = `${pct}%`;
+      document.getElementById('result-detail').textContent = `${odds} hands · ${handSize}-card hand · ${total}-card deck`;
 
       const section = document.getElementById('result-section');
       section.style.display = 'block';
-      section.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function drawHand(deck, size) {
-      const d = deck.slice();
+    function drawHand(fullDeck, size) {
+      const d    = fullDeck.slice();
       const hand = [];
       for (let i = 0; i < size; i++) {
         const idx = Math.floor(Math.random() * (d.length - i));
@@ -450,17 +599,15 @@
 
     function meetsConditions(hand, conditions) {
       for (const name of Object.keys(conditions)) {
-        const count = hand.filter(c => c === name).length;
-        if (count < conditions[name]) return false;
+        if (hand.filter(c => c === name).length < conditions[name]) return false;
       }
       return true;
     }
 
     // ── Utility ───────────────────────────────────────────────────
 
-    function esc(str) {
-      return str.replace(/'/g, "\\'");
-    }
+    function jsEsc(str)   { return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+    function htmlEsc(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   </script>
 
 </body>
